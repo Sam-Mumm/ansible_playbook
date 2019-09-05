@@ -1,0 +1,15 @@
+---
+- name: Erstellen von dem Projekt-Verzeichnis
+  file:
+    path: "{{ project_dir }}"
+    state: directory
+    recurse: yes
+
+- name: Kopieren von der Docker-Compose-Datei
+  template:
+    src: docker-compose.yml
+    dest: "{{ project_dir }}"
+
+- name: Starte Jenkins-Server mit Docker-Compose
+  docker_service:
+    project_src: "{{ project_dir }}"

@@ -1,0 +1,10 @@
+version: '2'
+services:
+  jenkins:
+    container_name: jenkins
+    image: 'jenkins/jenkins:lts'
+    ports:
+      - '{{port}}:8080'
+    environment:
+      JAVA_OPTS: -Djenkins.install.runSetupWizard=false
+#      JENKINS_OPTS: --argumentsRealm.passwd.admin=testtest
