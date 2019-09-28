@@ -10,6 +10,11 @@
     src: docker-compose.yml
     dest: "{{ project_dir }}"
 
+- name: Kopieren von der Docker-Compose-Datei
+  template:
+    src: casc.yaml
+    dest: "{{ project_dir }}"
+
 - name: Starte Jenkins-Server mit Docker-Compose
   docker_service:
     project_src: "{{ project_dir }}"
