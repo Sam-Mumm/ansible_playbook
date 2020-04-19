@@ -2,6 +2,7 @@
 - hosts: all
   become: True
   become_user: root
+  become_method: su
   roles:
+    - docker_build
     - docker_compose
-    - base_config

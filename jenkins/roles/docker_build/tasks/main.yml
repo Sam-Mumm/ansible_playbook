@@ -1,0 +1,28 @@
+---
+- name: "Kopieren der Plugin-Liste"
+  lineinfile:
+    line: "{{item}}"
+    path: "/tmp/plugins"
+    create: true
+  with_items: "{{ plugins }}"
+
+- name: "Kopieren des Docker-Buildfiles"
+  copy:
+    src: Dockerfile
+    dest: /tmp/Dockerfile
+
+- name: "Erstellen von dem Docker-Image"
+  docker_image:
+    path: /tmp
+    name: "{{ image_name }}"
+    tag: "{{ tag }}" 
+
+- name: "Clean Up: Plugin-Liste"
+  file:
+    path: "/tmp/plugins"
+    state: absent
+
+- name: "Clean Up: Dockerfile"
+  file:
+    path: "/tmp/Dockerfile"
+    state: absent
